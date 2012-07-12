@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connection>
+	<dbserver>pgsql</dbserver>
+	<dbname>exampledb</dbname>
+	<host>localhost</host>
+	<user>postgres</user>
+	<pssw>postgres</pssw>
+	</connection>
