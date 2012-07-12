@@ -10,12 +10,14 @@ use exception\PLConnectionException;
  * @author Cleber Azeredo <cleber.sistemas.info@gmail.com>
  * @version LP_MPAR 1.0.0
  */
-abstract class DBConnection 
+abstract class PL_Connection 
 {
-	private $conn;
 	private $user;
 	private $psswd;
-	private $dbinfo; 
+	private $dbinfo;
+	
+	protected $conn;
+	protected static $dbserver;
 	
 	/**
 	 * 
@@ -44,6 +46,7 @@ abstract class DBConnection
 			
 			$this->user		= $configXML->user;
 			$this->psswd	= $configXML->pssw;
+			$this->dbserver = $configXML->dbserver;
 		} 
 		else 
 		{

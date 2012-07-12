@@ -1,9 +1,19 @@
 <?php
 
-use connection\DBConnection;
+use persistence\PL_PGSQL;
+use connection\PL_Connection;
 
-include_once 'connection/DBConnection.php';
+require_once 'persistence/PL_PGSQL.php';
+require_once 'connection/PL_Connection.php';
 
-$bd = new DBConnection();
+$bd = new PL_PGSQL('client');
+
+$oRes = $bd->selectALL();
+
+foreach($oRes as $row)
+{
+	var_dump($row['nm_cli']);
+	echo '<br>';
+}
 
  
