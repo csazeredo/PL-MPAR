@@ -5,4 +5,4 @@
 	<host>localhost</host>
 	<user>postgres</user>
 	<pssw>postgres</pssw>
-	</connection>
+</connection>
