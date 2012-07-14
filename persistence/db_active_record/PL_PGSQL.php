@@ -7,34 +7,35 @@ require_once 'persistence/PL_ActiveRecord.php';
 
 /**
  * 
- * @author cleber
- *
+ * @author Cleber Azeredo <cleber.sistemas.info@gmail.com>
+ * @version PL_MPAR 1.0.0
  */
-class PL_PGSQL extends PL_ActiveRecord
+final class PL_PGSQL extends PL_ActiveRecord
 {
 	private $table;
 	
+	/**
+	 * 
+	 * @param unknown_type $table
+	 * @throws PLNullPointerException
+	 */
 	public function __construct($table)
 	{
 		if(empty($table))
 		{
 			throw new PLNullPointerException('Entrada de dados nula');
 		}
-		parent::__construct();
 		$this->table = $table;
 	}
 
 	/**
 	 * (non-PHPdoc)
 	 * @see \persistence\PLI_ActiveRecord::selectALL()
-	 * @return \PDOStatement
+	 * @return \PL_PGSQL
 	 */
 	public function selectALL()
 	{
-		$SQL = 'SELECT *
-				  FROM '. $this->table;
-		$oRes = $this->conn->query($SQL);
-		return $oRes;
+		return $this;
 	}
 	
 	/**
