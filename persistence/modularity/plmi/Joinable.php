@@ -1,10 +1,11 @@
 <?php
-namespace persistence\modularity;
+namespace persistence\modularity\plmi;
+use persistence\modularity\plmi\Sortable;
+use persistence\modularity\plmi\Selectable;
 
-use persistence\modularity\Sortable;
+require_once ('persistence/modularity/plmi/Sortable.php');
 require_once ('persistence/modularity/plmi/Selectable.php');
 
-use persistence\modularity\Selectable;
 interface Joinable extends Selectable, Sortable {}
 
 ?>

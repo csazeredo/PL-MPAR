@@ -5,8 +5,8 @@ namespace persistence;
 use connection\PL_Connection;
 use persistence\PLI_ActiveRecord;
 
-require_once '../connection/PL_Connection.php';
-require_once 'persistence/PLI_ActiveRecord.php';
+require_once 'persistence/connection/PL_Connection.php';
+require_once 'persistence/db_active_record/PLI_ActiveRecord.php';
 
 
 /**

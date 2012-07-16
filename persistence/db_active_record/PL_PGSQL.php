@@ -1,9 +1,15 @@
 <?php
 
 namespace persistence;
-use exception\PLNullPointerException;
+use persistence\modularity\plmi\Filterable;
 
-require_once 'persistence/PL_ActiveRecord.php';
+use exception\PLNullPointerException;
+use persistence\modularity\plms\SelectStatement;
+use persistence\modularity\plms\WhereStatement;
+
+require_once 'persistence/db_active_record/PL_ActiveRecord.php';
+require_once 'persistence/modularity/plms/SelectStatement.php';
+require_once 'persistence/modularity/plms/WhereStatement.php';
 
 /**
  * 
@@ -13,6 +19,7 @@ require_once 'persistence/PL_ActiveRecord.php';
 final class PL_PGSQL extends PL_ActiveRecord
 {
 	private $table;
+	private $statement;
 	
 	/**
 	 * 
@@ -35,7 +42,8 @@ final class PL_PGSQL extends PL_ActiveRecord
 	 */
 	public function selectALL()
 	{
-		return $this;
+		$select = new SelectStatement($this->table);
+		$this->statement = $select;
 	}
 	
 	/**
@@ -45,7 +53,23 @@ final class PL_PGSQL extends PL_ActiveRecord
 	 */
 	public function select(array $fields = array())
 	{
-		
+		$select = new SelectStatement($this->table, $fields);
+		$this->statement = $select;
+	}
+	
+	/**
+	 * 
+	 * @param array $filter
+	 * @return \persistence\modularity\plms\WhereStatement
+	 */
+	public function where($filter)
+	{
+		if(!empty($filter))
+		{
+			$where  = new WhereStatement($this->statement, $filter);
+			$this->statement = $where;
+			return $where;
+		}
 	}
 	
 	/**
@@ -55,6 +79,27 @@ final class PL_PGSQL extends PL_ActiveRecord
 	public function insert(array $data = array())
 	{
 		
+	}
+	 
+	/**
+	 * 
+	 * @throws PLNullPointerException
+	 * @return \PDOStatement
+	 */
+	public final function execute($fetch = \PDO::FETCH_ASSOC)
+	{
+		if(empty($this->statement))
+		{
+			throw new PLNullPointerException();	
+		}
+		else
+		{
+			$statement = $this->statement->getStatement();
+			$result    = parent::$conn->query($statement);
+			$result->setFetchMode($fetch);
+			//echo $statement;
+			return $result; 
+		}
 	}
 }
 

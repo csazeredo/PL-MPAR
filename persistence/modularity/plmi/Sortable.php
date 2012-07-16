@@ -1,10 +1,14 @@
 <?php
 
-namespace persistence\modularity;
-require_once ('persistence/modularity/Limitable.php');
+namespace persistence\modularity\plmi;
+use persistence\modularity\plmi\Limitable;
 
-use persistence\modularity\Limitable;
-
+require_once ('persistence/modularity/plmi//Limitable.php');
+/**
+ * 
+ * @author cleber
+ *
+ */
 interface Sortable extends Limitable {}
 
 ?>

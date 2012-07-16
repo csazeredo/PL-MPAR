@@ -1,10 +1,9 @@
 <?php
 
-namespace persistence\modularity;
+namespace persistence\modularity\plmi;
+use persistence\modularity\plmi\Limitable;
 
-require_once ('persistence/modularity/Limitable.php');
-
-use persistence\modularity\Limitable;
+require_once ('persistence/modularity/plmi/Limitable.php');
 
 /**
  * 
